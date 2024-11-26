@@ -20,7 +20,9 @@ This Java program implements a simple **Caesar Cipher** tool for encryption and 
    git clone https://github.com/your-repository-url.git
    cd your-repository-url
 2. Compile the Program
+
 javac SimpleEncryptor.java
 
 3. Run the Program
+
 java SimpleEncryptor
