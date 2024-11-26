@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class SimpleEncryptor {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the Simple Encryptor!");
+        System.out.println("This program uses the Caesar Cipher for encryption and decryption.");
+
+        while (true) {
+            System.out.println("\nWhat would you like to do?");
+            System.out.println("1. Encrypt a message");
+            System.out.println("2. Decrypt a message");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice (1/2/3): ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline
+
+            if (choice == 1) {
+                System.out.print("Enter the message to encrypt: ");
+                String message = scanner.nextLine();
+                System.out.print("Enter the shift value (1-25): ");
+                int shift = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+                String encrypted = caesarCipher(message, shift);
+                System.out.println("Encrypted Message: " + encrypted);
+            } else if (choice == 2) {
+                System.out.print("Enter the message to decrypt: ");
+                String encryptedMessage = scanner.nextLine();
+                System.out.print("Enter the shift value (1-25): ");
+                int shift = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+                String decrypted = caesarCipher(encryptedMessage, -shift);
+                System.out.println("Decrypted Message: " + decrypted);
+            } else if (choice == 3) {
+                System.out.println("Thank you for using the Simple Encryptor. Goodbye!");
+                break;
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        scanner.close();
+    }
+
+    public static String caesarCipher(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+        shift = shift % 26; // Ensure the shift is within the alphabet range
+
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                char shifted = (char) ((c - base + shift + 26) % 26 + base);
+                result.append(shifted);
+            } else {
+                result.append(c); // Non-alphabetic characters remain unchanged
+            }
+        }
+
+        return result.toString();
+    }
+}
